@@ -4,7 +4,7 @@ require("dotenv").config();
 const fastify = require("fastify")({ logger: true });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5252;
 // Fetch the publishable key to initialize Stripe.js
 fastify.get("/publishable-key", () => {
   return { publishable_key: process.env.STRIPE_PUBLISHABLE_KEY };
