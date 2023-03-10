@@ -43,49 +43,71 @@
 // start();
 
 
+// const express = require("express")
+// const app =express()
+// require("dotenv").config();
+// const stripe = require("stripe")("sk_test_51Mcxe6DebByDEiAZ6ERRjfSb39RZaEPggp1nwSQTce4PP1Ij46BgqbNkJ1gOan1BdqJSevjRMEdkbLan9RWHS2gE006f8IDTby")
+// const bodyParser = require("body-parser")
+// const cors = require("cors")
+
+// app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.json())
+// app.use(cors())
+// app.use(express.static("dist"));
+// app.use(express.json());
+
+// app.post("/cart", async (req, res) => {
+//     console.log("started cart")
+//   const { items } = req.body;
+//   try {
+//     const paymentIntent = await stripe.paymentIntents.create({
+//             amount: 30000,
+//             currency: "usd",
+//             description: "mre",
+//             automatic_payment_methods: {
+//               enabled: true,
+//             },
+//           });
+//           res.send({
+//             clientSecret: paymentIntent.client_secret,
+//           });
+//   } catch (error) {
+//     console.log("Error", error);
+//     return (
+//       res.status(400).send({
+//         error: {
+//           message: error.message,
+//         },
+//       }),
+//       res.json({
+//         message: "Payment Failed",
+//       })
+//     );
+//   }
+// })
+
+// app.listen(process.env.PORT || 5173, () => {
+//   console.log("Sever is listening on port 5173");
+// });
+
+
+
+
+// Importing express module
 const express = require("express")
-const app =express()
-require("dotenv").config();
-const stripe = require("stripe")("sk_test_51Mcxe6DebByDEiAZ6ERRjfSb39RZaEPggp1nwSQTce4PP1Ij46BgqbNkJ1gOan1BdqJSevjRMEdkbLan9RWHS2gE006f8IDTby")
-const bodyParser = require("body-parser")
-const cors = require("cors")
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json())
-app.use(cors())
-app.use(express.static("dist"));
-app.use(express.json());
-
-app.post("/cart", cors(), async (req, res) => {
-  const { items } = req.body;
-  try {
-    const paymentIntent = await stripe.paymentIntents.create({
-            amount: 30000,
-            currency: "usd",
-            description: "mre",
-            automatic_payment_methods: {
-              enabled: true,
-            },
-          });
-          res.send({
-            clientSecret: paymentIntent.client_secret,
-          });
-  } catch (error) {
-    console.log("Error", error);
-    return (
-      res.status(400).send({
-        error: {
-          message: error.message,
-        },
-      }),
-      res.json({
-        message: "Payment Failed",
-      })
-    );
-  }
+const app = express()
+  
+// Handling GET / request
+app.use("/", (req, res, next) => {
+    res.send("This is the express server")
 })
-
-app.listen(process.env.PORT || 5173, () => {
-  console.log("Sever is listening on port 5173");
-});
-
+  
+// Handling GET /hello request
+app.get("/hello", (req, res, next) => {
+    res.send("This is the hello response");
+})
+  
+// Server setup
+app.listen(3000, () => {
+    console.log("Server is Running")
+})
